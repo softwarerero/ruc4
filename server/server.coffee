@@ -9,11 +9,6 @@ apiRouter = express.Router()
 # 2. client auth
 # 3. SSL
 
-#apiRouter.use (req, res, next) ->
-#  console.log JSON.stringify req.params
-#  log "requested #{req.params.query} from #{req.ip}"
-#  next()
-
 apiRouter.get '/ruc/:query', (req, res) ->
   log "requested #{req.params.query} from #{req.ip}"
   search(res, sanitizeQuery req.params.query)
@@ -44,27 +39,4 @@ search = (res, query) ->
     res.send ret
 
 log = (l) -> console.log l
-
-#path = require('path')
-#send = require 'koa-send'
-#router = require('koa-router')()
-#koa = require 'koa'
-#app = koa()
-#
-#elClient = new elasticsearch.Client
-#  log: 'error'
-#  keepAlive: true
-#
-#router.get '/api/what', (next) ->
-#  genify = require('thunkify-wrap').genify
-#  search = genify(elClient.search)
-#  res = yield search {index: 'my-index', q: 'what'}
-#  this.body = {answer: "you send #{res}"}
-#app.use(router.routes())
-#
-#distDir = __dirname + '/../client/dist'
-#app.use (next) ->
-#  yield send(this, this.path, {root: distDir})
-#
-#app.listen 3000
 
