@@ -10,5 +10,6 @@ m.route document.getElementById("content"), "/",
   "/": require('./components/Search')
   "/sobre": require('./components/Sobre')
   "/calcDV": require('./components/CalcDV')
- 
+  "/explicacion": require('./components/SearchExplanation')
+  
  

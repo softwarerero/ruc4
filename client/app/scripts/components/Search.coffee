@@ -6,24 +6,26 @@ module.exports = class Search
   @loadingRequest: (args) ->
     loading = document.getElementById("loading")
     loading.style.display = "block"
+    console.log 'now request'
     m.request(args).then (value, err) ->
       loading.style.display = "none"
       value 
 
   SearchVM =
+    term: ''
     result: {}
     extract: (xhr, xhrOptions) ->
       console.log 'result: ' + JSON.parse xhr.response
       SearchVM.result = JSON.parse xhr.response
     deserialize: (xhr, xhrOptions) -> xhr
-    search: (controller, query) =>
+    search: (controller) =>
       request =
         method: 'GET'
-        url: "http://localhost:3000/api/ruc/#{query}"
+        url: "/api/ruc/#{SearchVM.term}"
 #        config: @xhrConfig
         deserialize: SearchVM.deserialize
         extract: SearchVM.extract
-      console.log 'search: ' + query
+      console.log 'search: ' + SearchVM.term
       @loadingRequest(request)
       
   @controller: () =>
@@ -31,16 +33,16 @@ module.exports = class Search
     search: (e) =>
       e.preventDefault()
       console.log 'search'
-      query = document.getElementById('search-field').value
-      unless query
+      SearchVM.term = document.getElementById('search-field').value
+      unless SearchVM.term
         return Message.error 'Tienes que buscar algo en la vida'
-      SearchVM.search this, query
+      SearchVM.search this
       
   @view: (ctrl) ->
     [ 
-      m 'h2', m.trust " Buscar un RUC<br><small>en el Registro Único del Contribuyente de Paraguay</small>"
+      m 'h2', m.trust "Buscar un RUC<br><small>en el Registro Único del Contribuyente de Paraguay</small>"
       m 'form', {class: 'pure-form2 pure-form-stacked2'}, [
-        m 'input', {id: 'search-field', placeholder: 'RUC o contribuyente'}
+        m 'input', {id: 'search-field', placeholder: 'RUC o contribuyente', value: SearchVM.term}
         m 'button', {onclick: ctrl.search, class: 'search'}, [
           m 'i', {class: 'fa fa-search'}          
         ]

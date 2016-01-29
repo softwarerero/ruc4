@@ -8,6 +8,7 @@ apiRouter = express.Router()
 # 1. encrypt response
 # 2. client auth
 # 3. SSL
+# 4 reverse proxy (nginx)
 
 apiRouter.get '/ruc/:query', (req, res) ->
   log "requested #{req.params.query} from #{req.ip}"
@@ -17,7 +18,7 @@ app.use '/api', apiRouter
 distDir = __dirname + '/../dist'
 app.use serveStatic distDir
 
-app.listen 3000
+app.listen 4000
 
 sanitizeQuery = (query) ->
   unless query.indexOf(' ') > 0
@@ -38,5 +39,15 @@ search = (res, query) ->
     console.log 'ret: ' + JSON.stringify ret
     res.send ret
 
+#MemoryIndexer = require './MemoryIndexer'
+#MemoryIndexer.createIndex()
+#searchMemory = (res, query) ->
+#  response = MemoryIndexer.search query
+#  ret =
+#    total: response.length
+#    hits: response
+##  console.log 'ret: ' + JSON.stringify ret
+#  res.send ret  
+  
 log = (l) -> console.log l
 

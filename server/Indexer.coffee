@@ -3,16 +3,12 @@ LOG = require '../lib/Log'
 fs = require 'fs'
 client = require './elClient'
 
-#client = new elasticsearch.Client
-#  log: 'error'
-#  keepAlive: true
-
 module.exports = class Indexer
   @indexName = null
   @type = 'ruc'
   @oldIndex = null
 
-  @createIndex: (number, index) ->
+  @getBulk: (number, index) ->
     csv = "#{Config.tmpPath}/ruc#{number}.txt"
     LOG 'csv', csv
     lines = fs.readFileSync(csv).toString().split('\n')
@@ -22,18 +18,21 @@ module.exports = class Indexer
       contribuyente: fields[1]
       dv: fields[2]
       ruc_antiguo: fields[3]
-    bulks = []
+    bulk = []
     lines = (l for l in lines when (line2Fields l).length is 5)
+    console.log "bulk has #{lines.length} rucs"
     for line in lines
       if line.length
-        bulks.push {index: {_index: index, _type: @type}}
-        bulks.push line2Data line2Fields line
-    client.bulk {body: bulks}, (error, response) ->
-      if error then return console.log "error: " + error
-      if number is 9
-        client.indices.putAlias {index: index, name: 'ruc'}, (error, response) ->
-          if error then return LOG 'error', error
-          Indexer.deleteOldIndex Indexer.oldIndex
+        bulk.push {index: {_index: index, _type: @type}}
+        bulk.push line2Data line2Fields line
+    bulk
+#    client.bulk {body: bulks}, (error, response) ->
+#      if error then return console.log "error: " + error
+#        cb(number+1)
+#      if number is 9
+#        client.indices.putAlias {index: index, name: 'ruc'}, (error, response) ->
+#          if error then return LOG 'error', error
+#          Indexer.deleteOldIndex Indexer.oldIndex
 
   @count: (cb) ->
     client.count {index: @indexName}, cb
@@ -64,13 +63,13 @@ module.exports = class Indexer
       if error then return LOG 'deleteIndex.error', error
       
   @deleteOldIndex: (index) ->
+    LOG 'deleteOldIndex', index
     client.indices.delete {index: index}, (error, response) ->
       if error then return LOG 'deleteOldIndex.error', error
       LOG.j 'response', response
     
-  @createMapping: (index) ->
-    LOG 'index', index
-    LOG 'type', @type
+  @createMapping: (index, cb) ->
+    LOG "createMapping index: #{index}"
     body =
       mappings:
         "#{Indexer.type}":
@@ -81,9 +80,49 @@ module.exports = class Indexer
             ruc_antiguo: {"type" : "string", "index" : "not_analyzed"}
     client.indices.create {index: index, body: body}, (error, response) ->
       if error then return LOG 'create.error', error
-      for i in [0..9]
-        Indexer.createIndex i, index
+      cb error, response
+#      for i in [0..9]
+#        Indexer.createIndex i, index
 
+  @allIndexes: (number, max, index) ->
+#    LOG 'allIndexes', number
+    bulk = Indexer.getBulk(number, index)
+
+    ready = -> 
+      console.log 'ready'
+      if number < max
+        Indexer.allIndexes(number+1, max, index)
+      else
+        Indexer.putAlias index
+
+    indexBulk = (start, chunkSize, index, bulk, cb) ->
+      if start >= bulk.length
+        return cb()
+      end = Math.min start+chunkSize, bulk.length
+#      console.log 'start: ' + start
+#      console.log 'end: ' + end
+      chunk = bulk[start...end]
+      client.bulk {body: chunk}, (error, response) ->
+        if error then return console.log "bulk.error: " + error
+        indexBulk(start+=chunkSize, chunkSize, index, bulk, cb)
+
+    indexBulk 0, 2000, index, bulk, ready          
+    
+      
+#    client.bulk {body: bulk, _index: index, _type: @type, timeout: 120000}, (error, response) ->
+#      if error then return console.log "bulk.error: " + error
+#      if number < max
+#        Indexer.allIndexes(number+1, max, index)
+#      else
+#        Indexer.putAlias index
+
+
+  @putAlias: (index) ->
+    LOG 'putAlias', index
+    client.indices.putAlias {index: index, name: 'ruc'}, (error, response) ->
+      if error then return LOG 'putAlias.error', error
+      Indexer.deleteOldIndex Indexer.oldIndex
+        
   @errorHandler = (error, response) ->
     if error
       console.log "error: " + error

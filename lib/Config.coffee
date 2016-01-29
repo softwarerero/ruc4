@@ -1,2 +1,2 @@
 module.exports =
-  tmpPath: '/Users/sun/Downloads'
+  tmpPath: './downloads'

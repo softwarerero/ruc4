@@ -9,7 +9,7 @@ module.exports = class Menu
     return m "div", {class: 'pure-menu pure-menu-horizontal'},
       m 'ul', {class: 'pure-menu-list'}, [
         m 'li', {class: 'pure-menu-item'}, [
-          m 'a', {class: 'pure-menu-link', href: '/'}, [
+          m 'a', {class: 'pure-menu-link', href: '/', config: m.route}, [
             m 'i', {class: 'fa fa-search'}
             m 'span', ' Buscador'
           ]
@@ -21,7 +21,8 @@ module.exports = class Menu
           ]
           m 'ul', {class: 'pure-menu-children'}, [
             mlink '/sobre', 'Sobre'
-            mlink '/calcDV', 'Calcular DV (Algoritmos)' 
+            mlink '/calcDV', 'Calcular DV (Algoritmos)'
+            mlink '/explicacion', 'Manual de busqueda'
           ]
         ]
       ]

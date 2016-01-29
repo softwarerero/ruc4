@@ -14,8 +14,39 @@ module.exports = class CalcDV
       m 'h2', 'Como calcular el Codigo Verificador del RUC?'
       m 'p', {style: ''}, m.trust 'En la <a href="http://www.set.gov.py/portal/PARAGUAY-SET/detail?content-id=/repository/collaboration/sites/PARAGUAY-SET/documents/herramientas/digito-verificador.pdf">
                     página del SET</a> existen funciones para calcular el dígito verificador del RUC (GUIÓN) en PL/SQL, Visual Basic y C.
-                  p Aqui publicamos los algoritmos en <strong>Scala, Groovy y Java.</strong>'
-  
+                  p Aqui publicamos los algoritmos en <strong>JavaScript, CoffeeScript, Scala, Groovy y Java.</strong>'
+
+      m 'h4', m.trust 'JavaScript'
+      m 'pre[style="white-space:pre"]', m.trust 'function calcDv(ruc) {
+      \n\tvar i, it, k, numero_aux, resto, total;
+      \n\tk = 2;
+      \n\ttotal = 0;
+      \n\truc = parseInt(ruc).toString().split("");
+      \n\tfor (i = ruc.length - 1; i >= 0; i += -1) {
+      \n\t  it = ruc[i];
+      \n\t  numero_aux = it.charCodeAt(0) - 48;
+      \n\t  k = k > 11 ? 2 : k;
+      \n\t  total += numero_aux * k++;
+      \n\t}
+      \n\tresto = total % 11;
+      \n\tif (resto > 1) {
+      \n\t  return 11 - resto;
+      \n\t} else {
+      \n\t  return 0;
+      \n\t}
+      \n};'
+
+      m 'h4', m.trust 'CoffeeScript'
+      m 'pre[style="white-space:pre"]', m.trust 'calcDv = (ruc) ->
+              \n\tk = 2; total = 0
+              \n\truc = parseInt(ruc).toString().split ""
+              \n\tfor it in ruc by -1
+              \n\t  numero_aux = it.charCodeAt(0) - 48
+              \n\t  k = if k > 11 then 2 else k
+              \n\t  total += numero_aux * k++
+              \n\tresto = total % 11
+              \n\tif resto > 1 then 11 - resto else 0'
+
       m 'h4', m.trust 'Scala <small>(No tan idiomático, yo se)</small>'
       m 'pre[style="white-space:pre"]', m.trust 'def calcDV(ruc: String, basemax: Int = 11) = {
         \n\tval numeroRuc = ruc.map(it =&gt; if (it.isDigit) it.asDigit else it).mkString.reverse
