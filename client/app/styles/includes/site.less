@@ -1,0 +1,189 @@
+body {
+  text-align: center;
+  color: #444;
+  width: 90%;
+  margin: auto;
+}
+
+.pure-menu li, pre {
+  text-align: left;
+}
+
+#message, #content, #footer {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.gradient (@origin: left, @start: #ffffff, @stop: #000000) {
+  background-color: @start;
+  background: linear-gradient(@start, @stop) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  background-image: -webkit-linear-gradient(@origin, @start, @stop);
+  background-image: -moz-linear-gradient(@origin, @start, @stop);
+  background-image: -o-linear-gradient(@origin, @start, @stop);
+  background-image: -ms-linear-gradient(@origin, @start, @stop);
+  background-image: linear-gradient(@origin, @start, @stop);
+}
+
+/* Mixin */
+.quick-gradient (@origin: left, @alpha: 0.2) {
+  background-image: -webkit-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+  background-image: -moz-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+  background-image: -o-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+  background-image: -ms-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+  background-image: linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+}
+
+.triangle-isosceles(@origin: left, @start: #ffffff, @stop: #000000) {
+  .gradient(@origin, @start, @stop);
+//  background: linear-gradient(#f9d835, #f3961c) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  background-color: #BADA55;
+  .quick-gradient(top, 0.2);
+  border-radius: 10px;
+  color: #fff;
+  margin: 0.5em 0em;
+  padding: 15px;
+  position: relative;
+}
+
+.error {
+  .triangle-isosceles(left, red, #f3961c);
+}
+
+.success {
+  .triangle-isosceles(left, green, yellow);
+}
+
+.warn {
+  .triangle-isosceles(left, #f9d835, #f3961c);
+}
+
+.none {
+  -moz-transition: opacity 3s ease-in-out;
+  opacity: 0;
+}
+
+
+.small {
+  font-size: 90%;
+}
+
+.menu:active, .menu:hover {
+  color: red;
+  text-decoration: none;
+}
+
+#loading {
+  display: none;
+  float: right;
+}
+
+
+.clear { 
+  clear:both;
+  margin-top: 0.5em !important;
+}
+
+.line {
+  margin-bottom: 0.5em;
+}
+
+
+.pure-menu-link, .pure-menu-disabled, .pure-menu-heading {
+  padding: 0.5em 1em 0.5em 0.1em;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px #ddd inset;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0.5em 0.6em;
+  
+}
+
+table {
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
+  background-color: #0078e7;
+  color: #fff;
+}
+button {
+  background-color: #e6e6e6;
+//  border: medium none rgba(0, 0, 0, 0);
+//  border-radius: 2px;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  padding-top: 0.41em;
+//  box-shadow: 0 1px 3px #ddd inset;
+}
+.pure-button {
+  -moz-user-select: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+// Get rid of dotted focos outline
+:focus {
+  outline: 0;
+}
+
+a, h4 {
+  color: @color1;
+}
+
+a {
+  text-decoration: none;
+}
+
+#search-result {
+  clear: both;
+  table {
+    margin-top: 25px;
+  }
+}
+
+#search-field {
+  width: 350px;
+}
+
+h2 {
+  small {
+    color: #999;
+    font-size: 65%;
+  }
+}
+
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  display: block;
+  font-size: 13px;
+  line-height: 1.42857;
+  margin: 0 0 10px;
+  padding: 9.5px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+code, kbd, pre, samp {
+  font-family: Monaco,Menlo,Consolas,"Courier New",monospace;
+}
+pre {
+  white-space: pre-wrap;
+}
