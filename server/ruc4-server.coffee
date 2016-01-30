@@ -1,14 +1,16 @@
 express = require('express')
 app = express()
 serveStatic = require('serve-static')
+compression = require('compression')
 
 apiRouter = express.Router()
+app.use(compression())
 
 #TODO:
-# 1. encrypt response
-# 2. client auth
-# 3. SSL
-# 4 reverse proxy (nginx)
+# 0. IOS Client
+# 1. Natice Client
+# 2. Desktop Client
+
 
 apiRouter.get '/ruc/:query', (req, res) ->
   log "requested #{req.params.query} from #{req.ip}"
@@ -39,15 +41,5 @@ search = (res, query) ->
     console.log 'ret: ' + JSON.stringify ret
     res.send ret
 
-#MemoryIndexer = require './MemoryIndexer'
-#MemoryIndexer.createIndex()
-#searchMemory = (res, query) ->
-#  response = MemoryIndexer.search query
-#  ret =
-#    total: response.length
-#    hits: response
-##  console.log 'ret: ' + JSON.stringify ret
-#  res.send ret  
-  
 log = (l) -> console.log l
 

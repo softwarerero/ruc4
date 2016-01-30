@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 
 
 gulp.task('compressJS', ['browserify'], function() {
+  console.log('compressJS');
   return gulp.src('dist/scripts/*.js')
     .pipe(uglify())
     .pipe(gulp.dest('dist/scripts'));

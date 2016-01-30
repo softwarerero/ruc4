@@ -1,7 +1,7 @@
 RUC Search - Episode 4
 
 ## Start server
-supervisor -e 'html|jade|less|coffee|ejs' node coffee/server.coffee
+supervisor -e 'html|jade|less|coffee' node coffee/server.coffee
 
 ## Modules
 * https://github.com/EvanOxfeld/node-unzip
@@ -19,7 +19,6 @@ npm i --save browserify-shim caching-coffeeify connect connect-livereload serve-
 
 ### Server
 /home/sun/.nvm/v5.4.1/bin/node
-#rsync -chavP --exclude 'backup' --exclude server/coffee/Config.coffee  107.170.166.67:~/clasiserv/front
 rsync -chavP --exclude 'node_modules' dist server node_modules lib 107.170.166.67:~/ruc4
 
 
