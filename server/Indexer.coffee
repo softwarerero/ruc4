@@ -26,13 +26,6 @@ module.exports = class Indexer
         bulk.push {index: {_index: index, _type: @type}}
         bulk.push line2Data line2Fields line
     bulk
-#    client.bulk {body: bulks}, (error, response) ->
-#      if error then return console.log "error: " + error
-#        cb(number+1)
-#      if number is 9
-#        client.indices.putAlias {index: index, name: 'ruc'}, (error, response) ->
-#          if error then return LOG 'error', error
-#          Indexer.deleteOldIndex Indexer.oldIndex
 
   @count: (cb) ->
     client.count {index: @indexName}, cb
@@ -81,11 +74,8 @@ module.exports = class Indexer
     client.indices.create {index: index, body: body}, (error, response) ->
       if error then return LOG 'create.error', error
       cb error, response
-#      for i in [0..9]
-#        Indexer.createIndex i, index
 
   @allIndexes: (number, max, index) ->
-#    LOG 'allIndexes', number
     bulk = Indexer.getBulk(number, index)
 
     ready = -> 
@@ -99,8 +89,6 @@ module.exports = class Indexer
       if start >= bulk.length
         return cb()
       end = Math.min start+chunkSize, bulk.length
-#      console.log 'start: ' + start
-#      console.log 'end: ' + end
       chunk = bulk[start...end]
       client.bulk {body: chunk}, (error, response) ->
         if error then return console.log "bulk.error: " + error
@@ -109,14 +97,6 @@ module.exports = class Indexer
     indexBulk 0, 2000, index, bulk, ready          
     
       
-#    client.bulk {body: bulk, _index: index, _type: @type, timeout: 120000}, (error, response) ->
-#      if error then return console.log "bulk.error: " + error
-#      if number < max
-#        Indexer.allIndexes(number+1, max, index)
-#      else
-#        Indexer.putAlias index
-
-
   @putAlias: (index) ->
     LOG 'putAlias', index
     client.indices.putAlias {index: index, name: 'ruc'}, (error, response) ->

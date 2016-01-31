@@ -112,6 +112,8 @@ module.exports = class CalcDV
       \n\t      
       \n\t  return v_digit;
       \n\t}'
-      
-      m 'p', m.trust '<img src="/img/creativeCommons.png"> Este código está bajo la licencia Creative Commons Attribution 3.0 License.'
+
+      m 'p', m.trust '<img src="img/creativeCommons.png"> Este código está bajo la licencia Creative Commons Attribution 3.0 License.'
+      m 'p', m.trust 'Envianos su traducción del algoritmo y lo publicamos con gusto aquí. Hemos ofrecido en varias occasiones desde 
+      el año 2008 a hacienda que añade nuestros traducciones a su documentación, pero hasta ahora no lo hicieron.'
     ]

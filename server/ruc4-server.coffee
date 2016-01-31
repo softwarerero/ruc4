@@ -7,8 +7,8 @@ apiRouter = express.Router()
 app.use(compression())
 
 #TODO:
-# 0. IOS Client
-# 1. Natice Client
+# 0. iOS Client
+# 1. Android Client
 # 2. Desktop Client
 
 

@@ -9,8 +9,13 @@ module.exports = class Search
     console.log 'now request'
     m.request(args).then (value, err) ->
       loading.style.display = "none"
-      value 
+      value
 
+#  navigator.userAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:44.0) Gecko/20100101 Firefox/44.0
+#  navigator.userAgent: Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13B137 (2098465040)
+  @isMobile: -> navigator.userAgent.indexOf('Mobile') > -1
+  @domain: -> if @isMobile() then 'http://ruc4.sun.com.py' else ''       
+      
   SearchVM =
     term: ''
     result: {}
@@ -21,7 +26,7 @@ module.exports = class Search
     search: (controller) =>
       request =
         method: 'GET'
-        url: "/api/ruc/#{SearchVM.term}"
+        url: "#{@domain()}/api/ruc/#{SearchVM.term}"
 #        config: @xhrConfig
         deserialize: SearchVM.deserialize
         extract: SearchVM.extract
@@ -32,7 +37,10 @@ module.exports = class Search
     
     search: (e) =>
       e.preventDefault()
-      console.log 'search'
+#      console.log 'search'
+#      console.log 'UserAgent: ' + document.getElementById('UserAgent')
+      console.log 'navigator.userAgent: ' + navigator.userAgent
+#      console.log 'href: ' + window.location.href      
       SearchVM.term = document.getElementById('search-field').value
       unless SearchVM.term
         return Message.error 'Tienes que buscar algo en la vida'

@@ -6,8 +6,9 @@ var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var size = require('gulp-size');
 var uglifycss = require('gulp-uglifycss');
+var source       = require('vinyl-source-stream');
 
-gulp.task('styles', function () {
+gulp.task('styles', ['copyMobile'],  function () {
   return gulp.src('client/app/styles/main.less')
     .pipe(less({
       paths: ['client/app/styles/includes', 'client/app/styles/libs']
@@ -18,4 +19,12 @@ gulp.task('styles', function () {
     }))
     .pipe(gulp.dest('dist/styles'))
     .pipe(size());
+});
+
+gulp.task('copyMobile', function() {
+  return gulp.src('client/app/styles/mobile.css')
+    .pipe(uglifycss({
+      "max-line-len": 80
+    }))
+    .pipe(gulp.dest('dist/styles'));
 });

@@ -20,7 +20,7 @@ module.exports = class Menu
             m 'span', ' Información'
           ]
           m 'ul', {class: 'pure-menu-children'}, [
-            mlink '/explicacion', 'Manual de busqueda'
+            mlink '/explicacion', 'Manual de búsqueda'
             mlink '/calcDV', 'Calcular DV (Algoritmos)'
             mlink '/sobre', 'Sobre'
           ]

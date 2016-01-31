@@ -158,7 +158,8 @@ a {
 }
 
 #search-field {
-  width: 350px;
+//  width: 350px;
+  width: 15em;
 }
 
 h2 {
@@ -186,4 +187,20 @@ code, kbd, pre, samp {
 }
 pre {
   white-space: pre-wrap;
+}
+
+//iPhone hack
+@media screen and (max-width: 480px) {
+  body {
+    width: 100%;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 110% !important;
+  }
+  #search-field {
+    width: 12em;
+  }
+  #wrap {
+    margin: 0 auto -60px;
+  }
 }

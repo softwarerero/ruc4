@@ -13,7 +13,7 @@ module.exports = class Sobre
     [
       m 'h2', 'Sobre el Buscador de RUC'
       m 'p', {style: ''}, m.trust 'SUNCOM RUC es un pequeño buscador para encontrar un RUC en el <strong>Registro Único del Contribuyente de Paraguay</strong>.'
-      m 'img', {src: '/img/ruc.png', style: ''}
+      m 'img', {src: 'img/ruc.png', style: ''}
       m 'h4', 'Utilizamos las sigientes herramientas y damos gracias a sus desarrolladores:'
       m 'p', m.trust 'CoffeeScript, Elasticsearch, Mithril, Node, Express, Gulp, Browserify, Pure, Fontawesome'
       m 'table', {class: 'pure-table'}, [

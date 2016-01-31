@@ -1,4 +1,4 @@
-calcDv = (ruc) ->
+module.exports = (ruc) ->
   k = 2; total = 0
   ruc = parseInt(ruc).toString().split ''
   for it in ruc by -1

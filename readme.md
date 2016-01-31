@@ -1,6 +1,8 @@
 RUC Search - Episode 4
 
 ## Start server
+/home/sun/.nvm/v5.4.1/bin/node
+rsync -chavP --exclude 'node_modules' dist server node_modules lib 107.170.166.67:~/ruc4
 supervisor -e 'html|jade|less|coffee' node coffee/server.coffee
 
 ## Modules
@@ -16,10 +18,6 @@ supervisor -e 'html|jade|less|coffee' node coffee/server.coffee
 
 ### Npm modules 
 npm i --save browserify-shim caching-coffeeify connect connect-livereload serve-static serve-index cordova-lib del gulp gulp-autoprefixer gulp-cache gulp-coffee gulp-csso gulp-filter gulp-flatten gulp-imagemin gulp-jshint gulp-less gulp-livereload gulp-load-plugins gulp-notify gulp-run gulp-size gulp-sourcemaps gulp-uglify gulp-useref gulp-util jshint-stylish main-bower-files opn pretty-hrtime vinyl-source-stream watchify wiredep serve-static serve-index coffee-script
-
-### Server
-/home/sun/.nvm/v5.4.1/bin/node
-rsync -chavP --exclude 'node_modules' dist server node_modules lib 107.170.166.67:~/ruc4
 
 
 ### PM2
