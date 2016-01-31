@@ -2,3 +2,6 @@ dist
 node_modules
 downloads
 nginx
+cordova/platforms
+cordova/www
+cordova2
