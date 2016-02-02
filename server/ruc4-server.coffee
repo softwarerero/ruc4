@@ -32,7 +32,7 @@ sanitizeQuery = (query) ->
 
 search = (res, query) ->
   elClient = require './elClient'
-  elClient.search {index: 'ruc', q: query}, (error, response) ->
+  elClient.search {index: 'ruc', q: query, defaultOperator: 'AND'}, (error, response) ->
     if error then return log 'error: ' + error
     ret =
       took: response.took

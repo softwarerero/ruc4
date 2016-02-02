@@ -42,3 +42,10 @@ sudo swapon /swapfile
 sudo service nginx restart
 
 curl -XDELETE 'http://localhost:9200/ruc-1454100420930/'
+
+### Backlog
+* Do some logging
+* Deploy to Google Play
+* Deploy to Apple App Store
+* Create fat client
+* Use SSL: https://github.com/DylanPiercey/auto-sni
