@@ -1,5 +1,7 @@
 RUC Search - Episode 4
 
+# based on Node 5.4.1
+
 ## Start server
 /home/sun/.nvm/v5.4.1/bin/node
 rsync -chavP --exclude 'node_modules' dist server node_modules lib 107.170.166.67:~/ruc4
@@ -49,3 +51,5 @@ curl -XDELETE 'http://localhost:9200/ruc-1454100420930/'
 * Deploy to Apple App Store
 * Create fat client
 * Use SSL: https://github.com/DylanPiercey/auto-sni
+
+
