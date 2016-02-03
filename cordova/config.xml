@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="py.com.sun.ruc" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SUNCOM RUC - Paraguay</name>
+    <name>RUCParaguay</name>
     <description>Buscar un RUC de Paraguay</description>
     <author email="info@sun.com.py" href="http://sun.com.py">SUNCOM Systems</author>
     <content src="index.html" />

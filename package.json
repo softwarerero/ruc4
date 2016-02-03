@@ -2,6 +2,9 @@
   "name": "ruc4",
   "version": "0.0.1",
   "description": "RUC Search - Episode 4",
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script/register server/test/test.coffee"
+  },
   "browserify": {
     "transform": [
       "caching-coffeeify"
@@ -15,6 +18,7 @@
     "connect-livereload": "^0.5.4",
     "cordova-lib": "^5.4.1",
     "del": "^2.2.0",
+    "ejs": "^2.4.1",
     "elasticsearch": "^10.1.2",
     "express": "^4.13.4",
     "gulp": "^3.9.0",
@@ -52,9 +56,6 @@
     "watchify": "^3.7.0",
     "when": "^3.7.7",
     "wiredep": "^3.0.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "El Softwarerero <el@softwarerero.com> (http://github.com/softwarerero)",
   "license": "ISC",

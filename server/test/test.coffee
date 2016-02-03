@@ -8,9 +8,9 @@ mismatches = 0
 
 describe 'calcDV', () ->
   @timeout 10000
-  it 'every dv in downloaded files should be correct', () ->
+  it 'most dv in downloaded files should be correct', () ->
     for i in [0..9]
-      csv = "../downloads/ruc#{i}.txt"
+      csv = "#{Config.tmpPath}/ruc#{i}.txt"
       LOG 'csv', csv
       lines = fs.readFileSync(csv).toString().split('\n')
       line2Fields = (line) -> line.split '|'

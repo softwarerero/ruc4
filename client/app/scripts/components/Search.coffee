@@ -6,7 +6,6 @@ module.exports = class Search
   @loadingRequest: (args) ->
     loading = document.getElementById("loading")
     loading.style.display = "block"
-    console.log 'now request'
     m.request(args).then (value, err) ->
       loading.style.display = "none"
       value
@@ -20,7 +19,6 @@ module.exports = class Search
     term: ''
     result: {}
     extract: (xhr, xhrOptions) ->
-      console.log 'result: ' + JSON.parse xhr.response
       SearchVM.result = JSON.parse xhr.response
     deserialize: (xhr, xhrOptions) -> xhr
     search: (controller) =>
@@ -30,7 +28,6 @@ module.exports = class Search
 #        config: @xhrConfig
         deserialize: SearchVM.deserialize
         extract: SearchVM.extract
-      console.log 'search: ' + SearchVM.term
       @loadingRequest(request)
       
   @controller: () =>

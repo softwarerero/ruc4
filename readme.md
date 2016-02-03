@@ -5,7 +5,8 @@ RUC Search - Episode 4
 ## Start server
 /home/sun/.nvm/v5.4.1/bin/node
 rsync -chavP --exclude 'node_modules' dist server node_modules lib 107.170.166.67:~/ruc4
-supervisor -e 'html|jade|less|coffee' node coffee/server.coffee
+rsync -chavP dist server node_modules lib 107.170.166.67:~/ruc4
+supervisor -e 'html|jade|less|coffee' node server/ruc4-server.coffee
 
 ## Modules
 * https://github.com/EvanOxfeld/node-unzip
@@ -15,7 +16,7 @@ supervisor -e 'html|jade|less|coffee' node coffee/server.coffee
 ## Elasticsearch
 * https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference-2-2.html
 * https://www.elastic.co/guide/en/elasticsearch/reference/current/search-search.html
-
+brew info elasticsearch
 
 
 ### Npm modules 
@@ -23,6 +24,7 @@ npm i --save browserify-shim caching-coffeeify connect connect-livereload serve-
 
 
 ### PM2
+ssh ruc4.sun.com.py
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-14-04
 sudo su -c "env PATH=$PATH:/home/sun/.nvm/v5.4.1/bin pm2 startup ubuntu -u sun --hp /home/sun"
 pm2 start ruc4/server/ruc4-server.coffee
@@ -51,5 +53,6 @@ curl -XDELETE 'http://localhost:9200/ruc-1454100420930/'
 * Deploy to Apple App Store
 * Create fat client
 * Use SSL: https://github.com/DylanPiercey/auto-sni
+* Logging
 
 
