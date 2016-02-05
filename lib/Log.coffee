@@ -2,7 +2,6 @@ module.exports = (name, data) -> console.log name + ': ' + data
 module.exports.j = (name, data) -> console.log name + ': ' + JSON.stringify data
 
 fs = require('fs')
-console.log "#{__dirname}/logs/app.log"
 app = fs.createWriteStream "#{__dirname}/../logs/app.log", {flags: 'a'}
 err = fs.createWriteStream "#{__dirname}/../logs/err.log", {flags: 'a'}
 

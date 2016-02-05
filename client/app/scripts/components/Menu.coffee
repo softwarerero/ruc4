@@ -15,7 +15,7 @@ module.exports = class Menu
           ]
         ]
         m 'li', {class: 'pure-menu-item pure-menu-has-children pure-menu-allow-hover'}, [
-          m 'a', {class: 'pure-menu-link', href: '/sobre', config: m.route}, [
+          m 'a', {class: 'pure-menu-link', href: '#', config: m.route}, [
             m 'i', {class: 'fa fa-info'}
             m 'span', ' Información'
           ]
@@ -23,6 +23,7 @@ module.exports = class Menu
             mlink '/explicacion', 'Manual de búsqueda'
             mlink '/calcDV', 'Calcular DV (Algoritmos)'
             mlink '/sobre', 'Sobre'
+            mlink '/dispositivos', 'Dispositivos'
           ]
         ]
       ]

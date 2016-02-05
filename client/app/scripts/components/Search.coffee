@@ -12,9 +12,12 @@ module.exports = class Search
 
 #  navigator.userAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:44.0) Gecko/20100101 Firefox/44.0
 #  navigator.userAgent: Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13B137 (2098465040)
-  @isMobile: -> navigator.userAgent.indexOf('Mobile') > -1
-  @domain: -> if @isMobile() then 'http://ruc4.sun.com.py' else ''       
-      
+#  @isMobile: -> navigator.userAgent.indexOf('Mobile') > -1
+#  @domain: -> if @isMobile() then 'http://ruc4.sun.com.py' else ''
+  @domain: -> if location.host then "http://#{location.host}" else 'http://ruc.sun.com.py'
+#  @domain: -> ''
+#http://localhost:4000/api/ruc/t
+  
   SearchVM =
     term: ''
     result: {}
@@ -22,6 +25,7 @@ module.exports = class Search
       SearchVM.result = JSON.parse xhr.response
     deserialize: (xhr, xhrOptions) -> xhr
     search: (controller) =>
+#      console.log "#{@domain()}/api/ruc/#{SearchVM.term}"
       request =
         method: 'GET'
         url: "#{@domain()}/api/ruc/#{SearchVM.term}"
@@ -34,10 +38,6 @@ module.exports = class Search
     
     search: (e) =>
       e.preventDefault()
-#      console.log 'search'
-#      console.log 'UserAgent: ' + document.getElementById('UserAgent')
-      console.log 'navigator.userAgent: ' + navigator.userAgent
-#      console.log 'href: ' + window.location.href      
       SearchVM.term = document.getElementById('search-field').value
       unless SearchVM.term
         return Message.error 'Tienes que buscar algo en la vida'

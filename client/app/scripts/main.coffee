@@ -14,6 +14,7 @@ m.route document.getElementById("content"), "/",
   "/sobre": require('./components/Sobre')
   "/calcDV": require('./components/CalcDV')
   "/explicacion": require('./components/SearchExplanation')
-
+  "/dispositivos": require('./components/Devices')
+  
 #hack: try to render on some android devices there is a timing problem 
 window.setTimeout m.redraw, 200  

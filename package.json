@@ -2,8 +2,30 @@
   "name": "ruc4",
   "version": "0.0.1",
   "description": "RUC Search - Episode 4",
+  "main": "electron_start.js",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register server/test/test.coffee"
+    "test": "mocha --compilers coffee:coffee-script/register server/test/test.coffee",
+    "start-electron": "electron dist/electron_start.js",
+    "package-electron": "electron-packager ./dist 'RUC Paraguay' --all --version=0.36.7 app-version=4.0.1 --out=./electron --overwrite --icon=./marketing/img/ruc4_splash_512.icns"
+  },
+  "builder": {
+    "osx" : {
+      "title": "RUC Paraguay - SUNCOM Systems",
+      "background": "marketing/img/ruc4_splash_1024.jpg",
+      "icon": "marketing/img/ruc4_splash_512.icns",
+      "icon-size": 80,
+      "contents": [
+        { "x": 448, "y": 400, "type": "link", "path": "/Applications" },
+        { "x": 250, "y": 400, "type": "file" }
+      ]
+    },
+    "win" : {
+      "title": "RUC Paraguay - SUNCOM Systems",
+      "version" : "4.0.1",
+      "publisher": "SUNCOM Systems",
+      "icon" : "assets/win/icon.ico",
+      "verbosity": 1
+    }
   },
   "browserify": {
     "transform": [
@@ -61,6 +83,7 @@
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.0.0",
+    "electron-packager": "^5.2.1",
     "gulp-cssnano": "^2.1.0",
     "gulp-csso": "^1.0.1",
     "gulp-uglify": "^1.5.1",
