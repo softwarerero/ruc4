@@ -11,7 +11,7 @@ supervisor -e 'html|jade|less|coffee' node server/ruc4-server.coffee
 ## Modules
 * https://github.com/EvanOxfeld/node-unzip
 * elasticsearch
-
+* browser-platform
 
 ## Elasticsearch
 * https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference-2-2.html
@@ -58,11 +58,17 @@ https://github.com/loopline-systems/electron-builder
 
 - brew install wine makensis # for windows packaging
 
+- Build Electron App
+    npm run-script package-electron
+    electron-builder 'electron/RUC Paraguay-darwin-x64/RUC Paraguay.app' --platform=osx --out=electron/dist/osx/ --config=electron.json
+    - this creates a dmg file in electron/dist/osx
+
 ### Backlog
-* Do some logging
+* Do some logging (with timespamp)
 * Deploy to Google Play
 * Deploy to Apple App Store
 * Create fat client
 * Use SSL: https://github.com/DylanPiercey/auto-sni
-* Logging
+* Statistics (how many searches)
+* http://fortawesome.github.io/Font-Awesome/icons/
 

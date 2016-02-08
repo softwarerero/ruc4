@@ -1,16 +1,18 @@
 {
-  "name": "ruc4",
+  "name": "ruc",
   "version": "0.0.1",
-  "description": "RUC Search - Episode 4",
+  "description": "RUC Paraguay - Episode 4",
   "main": "electron_start.js",
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script/register server/test/test.coffee",
     "start-electron": "electron dist/electron_start.js",
-    "package-electron": "electron-packager ./dist 'RUC Paraguay' --all --version=0.36.7 app-version=4.0.1 --out=./electron --overwrite --icon=./marketing/img/ruc4_splash_512.icns"
+    "package-electron": "electron-packager ./dist 'RUC Paraguay' --all --version=0.36.7 app-version=4.0.1 --out=./electron --overwrite --icon=./marketing/img/ruc4_splash_512.icns",
+    "build-osx-electron": "rm -f electron/dist/osx/*.dmg && electron-builder 'electron/RUC Paraguay-darwin-x64/RUC Paraguay.app' --platform=osx --out=electron/dist/osx/ --config=electron.json",
+    "build-win-electron": "electron-builder 'electron/RUC Paraguay-darwin-x64/RUC Paraguay.app' --platform=win32 --out=electron/dist/win32/ --config=electron.json"
   },
   "builder": {
     "osx" : {
-      "title": "RUC Paraguay - SUNCOM Systems",
+      "title": "RUC Paraguay",
       "background": "marketing/img/ruc4_splash_1024.jpg",
       "icon": "marketing/img/ruc4_splash_512.icns",
       "icon-size": 80,
@@ -20,7 +22,7 @@
       ]
     },
     "win" : {
-      "title": "RUC Paraguay - SUNCOM Systems",
+      "title": "RUC Paraguay",
       "version" : "4.0.1",
       "publisher": "SUNCOM Systems",
       "icon" : "assets/win/icon.ico",
@@ -80,7 +82,7 @@
     "wiredep": "^3.0.0"
   },
   "author": "El Softwarerero <el@softwarerero.com> (http://github.com/softwarerero)",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "browserify": "^13.0.0",
     "electron-packager": "^5.2.1",
